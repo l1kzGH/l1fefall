@@ -17,8 +17,8 @@ public class PlayerMov : MonoBehaviour
         isGrounded = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate for rigidbody and physics
+    void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
