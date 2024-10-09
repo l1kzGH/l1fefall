@@ -8,12 +8,14 @@ public class PlayerMov : MonoBehaviour
     public float speed = 5f;
     public float jumpPower = 5f;
     private Rigidbody rb;
+    private Camera camera;
     private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        camera = Camera.main;
         isGrounded = true;
     }
 
@@ -23,10 +25,22 @@ public class PlayerMov : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized * speed;
+        Vector3 cameraForward = camera.transform.forward; // forward
+        Vector3 cameraRight = camera.transform.right; // right
 
+        // remove Y-const
+        cameraForward.y = 0; 
+        cameraRight.y = 0;
+
+        // normalizin
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 movement = (cameraForward * moveVertical + cameraRight * moveHorizontal).normalized * speed;
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
+    }
 
+    private void Update() {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
@@ -50,9 +64,9 @@ public class PlayerMov : MonoBehaviour
             Debug.Log("Contact with ground: " + collidedObjectName);
             isGrounded = true;
         }
-        else
-        {
-            Debug.Log("Contact with ?: " + collidedObjectName);
-        }
+        // else
+        // {
+        //     Debug.Log("Contact with ?: " + collidedObjectName);
+        // }
     }
 }
