@@ -8,14 +8,14 @@ public class PlayerMov : MonoBehaviour
     public float speed = 5f;
     public float jumpPower = 5f;
     private Rigidbody rb;
-    private Camera camera;
+    private Camera mainCamera;
     private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        camera = Camera.main;
+        mainCamera = Camera.main;
         isGrounded = true;
     }
 
@@ -25,8 +25,8 @@ public class PlayerMov : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 cameraForward = camera.transform.forward; // forward
-        Vector3 cameraRight = camera.transform.right; // right
+        Vector3 cameraForward = mainCamera.transform.forward; // forward
+        Vector3 cameraRight = mainCamera.transform.right; // right
 
         // remove Y-const
         cameraForward.y = 0; 
