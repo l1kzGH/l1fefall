@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     public DamageFlash damageFlash;
     public TMP_Text loseText;
     private bool status = false;
+    public RestartController restartController;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +76,8 @@ public class HealthBar : MonoBehaviour
         }
 
         text.color = endColor;
+        // reset-button
+        restartController.OnPlayerDeath();
     }
 
 }
