@@ -1299,6 +1299,7 @@ GameObject:
   - component: {fileID: 620579688}
   - component: {fileID: 620579687}
   - component: {fileID: 620579691}
+  - component: {fileID: 620579692}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1412,6 +1413,20 @@ MonoBehaviour:
   upperDamagePanel: {fileID: 60823784}
   downDamagePanel: {fileID: 1329206418}
   flashDuration: 0.5
+--- !u!114 &620579692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620579686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9768258782ffd54caca54b43d951061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resButton: {fileID: 2126769647}
+  loseText: {fileID: 1027955136}
 --- !u!1 &678334205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,7 +2072,7 @@ GameObject:
   - component: {fileID: 1395716115}
   - component: {fileID: 1395716114}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RBText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2556,8 +2571,8 @@ MonoBehaviour:
   maxHealth: 100
   playerObj: {fileID: 401823535}
   damageFlash: {fileID: 620579691}
-  loseText: {fileID: 1027955136}
-  restartController: {fileID: 2126769650}
+  restartController: {fileID: 620579692}
+  playerMov: {fileID: 401823543}
 --- !u!114 &2021398852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2657,7 +2672,6 @@ GameObject:
   - component: {fileID: 2126769649}
   - component: {fileID: 2126769648}
   - component: {fileID: 2126769647}
-  - component: {fileID: 2126769650}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -2767,19 +2781,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126769645}
   m_CullTransparentMesh: 1
---- !u!114 &2126769650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126769645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9768258782ffd54caca54b43d951061, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resButton: {fileID: 2126769647}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

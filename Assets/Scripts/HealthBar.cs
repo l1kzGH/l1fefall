@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
     public Slider healthSlider;
     public int maxHealth = 100;
     private int currHealth;
+
     public GameObject playerObj;
     public DamageFlash damageFlash;
-    public TMP_Text loseText;
-    private bool status = false;
     public RestartController restartController;
+    public PlayerMov playerMov;
+
+    private bool status = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,6 @@ public class HealthBar : MonoBehaviour
         currHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currHealth;
-        loseText.alpha = 0;
     }
 
     // Update is called once per frame
@@ -37,7 +37,8 @@ public class HealthBar : MonoBehaviour
         if (currHealth == 0 && !status)
         {
             status = true;
-            ShowLoseText();
+            PlayerDeath();
+            restartController.ShowLoseText();
         }
     }
 
@@ -50,34 +51,17 @@ public class HealthBar : MonoBehaviour
         damageFlash.TriggerFlash();
     }
 
-    private void ShowLoseText()
+    private void PlayerDeath()
     {
-        Debug.Log("Lose");
-        // fast-momental
-        // Color textColor = loseText.color;
-        // textColor.a = 1.0f; 
-        // loseText.color = textColor;
+        // unpin "Freeze Rotation"
+        Rigidbody rb = playerObj.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.None;
 
-        // slowly
-        StartCoroutine(FadeTextToFullAlpha(loseText, 3f));
-    }
-
-    private IEnumerator FadeTextToFullAlpha(TMP_Text text, float duration)
-    {
-        Color startColor = text.color;
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 1f);
-
-        float elapsedTime = 0f;
-        while (elapsedTime < duration)
+        // remove all controls
+        if (playerMov)
         {
-            text.color = Color.Lerp(startColor, endColor, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            Destroy(playerMov);
         }
-
-        text.color = endColor;
-        // reset-button
-        restartController.OnPlayerDeath();
     }
 
 }

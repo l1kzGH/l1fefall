@@ -58,7 +58,6 @@ public class PlayerMov : MonoBehaviour
     {
         string collidedObjectName = collision.gameObject.name;
         
-        // Debug.log for debugging the object-collisions-with
         if (collision.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Contact with ground: " + collidedObjectName);
