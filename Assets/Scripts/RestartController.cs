@@ -9,11 +9,13 @@ public class RestartController : MonoBehaviour
 {
     public Button resButton;
     public TMP_Text loseText;
+    public TMP_Text winText;
 
     // Start is called before the first frame update
     void Start()
     {
         loseText.alpha = 0;
+        winText.alpha = 0;
 
         resButton.onClick.AddListener(RestartLevel); // Restart-listener
         resButton.gameObject.SetActive(false);
@@ -49,14 +51,13 @@ public class RestartController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        text.color = endColor;
-        // reset-button
         
-        OnPlayerDeath();
+        text.color = endColor;
+
+        OnPlayerDeathWin();
     }
 
-    private void OnPlayerDeath()
+    private void OnPlayerDeathWin()
     {
         Cursor.lockState = CursorLockMode.None;
         resButton.gameObject.SetActive(true);
@@ -66,5 +67,11 @@ public class RestartController : MonoBehaviour
     {
         // scene-reload
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ShowWinText()
+    {
+        Debug.Log("Win");
+        StartCoroutine(FadeTextToFullAlpha(winText, 3f));
     }
 }
