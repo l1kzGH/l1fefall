@@ -10,6 +10,7 @@ public class RestartController : MonoBehaviour
     public Button resButton;
     public TMP_Text loseText;
     public TMP_Text winText;
+    public Timer timer;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class RestartController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         text.color = endColor;
 
         OnPlayerDeathWin();
@@ -72,6 +73,7 @@ public class RestartController : MonoBehaviour
     public void ShowWinText()
     {
         Debug.Log("Win");
+        StartCoroutine(timer.MoveByWin());
         StartCoroutine(FadeTextToFullAlpha(winText, 3f));
     }
 }

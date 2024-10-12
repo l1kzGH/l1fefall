@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     public TMP_Text timeText;
     private float elapseTime;
     private bool isRunning;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +51,28 @@ public class Timer : MonoBehaviour
         int milliseconds = Mathf.FloorToInt((elapseTime * 100) % 100);
 
         timeText.text = string.Format("{0}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+    }
+
+    public IEnumerator MoveByWin()
+    {
+        float elapsedTime = 0f;
+        float duration = 5f;
+
+        RectTransform rectTransform = timeText.GetComponent<RectTransform>();
+
+        Vector2 endPos = new Vector2(0, 60);
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+
+            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, endPos, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rectTransform.anchoredPosition = endPos;
     }
 
 }

@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
     public DamageFlash damageFlash;
     public RestartController restartController;
     public PlayerMov playerMov;
+    public Timer timer;
 
     private bool status = false;
 
@@ -37,6 +38,7 @@ public class HealthBar : MonoBehaviour
         if (currHealth == 0 && !status)
         {
             status = true;
+            timer.StopTimer();
             PlayerDeath();
             restartController.ShowLoseText();
         }
