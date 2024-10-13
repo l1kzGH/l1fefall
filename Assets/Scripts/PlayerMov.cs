@@ -6,7 +6,7 @@ public class PlayerMov : MonoBehaviour
 {
 
     public float speed = 5f;
-    public float jumpPower = 5f;
+    public float jumpPower = 8f;
     private Rigidbody rb;
     private Camera mainCamera;
     private bool isGrounded;
